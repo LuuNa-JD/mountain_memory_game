@@ -1,0 +1,8 @@
+<h1 class="game-title">Memory Game</h1>
+<div class="cards-grid">
+  <% @cards.each do |card| %>
+    <div class="card">
+      <%= image_tag(card.image_url, alt: card.name) %>
+    </div>
+  <% end %>
+</div>
