@@ -6,11 +6,21 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 images = []
+
+# Ajoutez chaque image une fois dans la liste
 (1..20).each do |i|
   images << "cards/mountain#{i}.png"
+end
 
-  images.each do |image|
-    Card.create(name: image.split('/').last.split('.').first, image_url: image, matched: false)
+# Mélangez la liste d'images
+images.shuffle!
+
+# Créez les cartes en paires
+images.each do |image|
+  name = image.split('/').last.split('.').first
+  next if Card.exists?(name: name)
+
+  2.times do
+    Card.create(name: name, image_url: image, matched: false)
   end
-
 end

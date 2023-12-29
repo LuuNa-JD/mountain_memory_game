@@ -1,8 +1,12 @@
 <h1 class="game-title">Memory Game</h1>
-<div class="cards-grid">
+<%= link_to 'Facile', cards_path(difficulty: 'easy') %>
+<%= link_to 'Moyen', cards_path(difficulty: 'medium') %>
+<%= link_to 'Difficile', cards_path(difficulty: 'hard') %>
+
+<div class="cards-grid" data-controller="memory-game">
   <% @cards.each do |card| %>
-    <div class="card">
-      <%= image_tag(card.image_url, alt: card.name) %>
+    <div class="card" data-card-id="<%= card.id %>" data-action="click->memory-game#flipCard" data-memory-game-target="card">
+      <%= image_tag(card.image_url, alt: card.name, class: 'card-image hidden') %>
     </div>
   <% end %>
 </div>
